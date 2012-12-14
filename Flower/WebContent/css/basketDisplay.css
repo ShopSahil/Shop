@@ -1,0 +1,105 @@
+#footerLink a {
+	text-align:right;
+	color:#333;
+	text-decoration:none;
+	font-size:11px
+}
+#footerLink {
+	position:relative;
+	top:10px;
+	right:-35px
+}
+
+body {
+	background: url(images/common/images/iflorist/pagebackground.jpg) repeat-x #f7f7f7 top center !important;
+	margin-top: 0px;
+}
+.ih_accountlinks {
+	font: normal 13px Arial;
+	color: #000000;
+}
+.ih_accountlinks a:link {
+	color: #4a4a4a;
+	font-weight:bold;
+	text-decoration: none;
+}
+.ih_accountlinks a:visited {
+	color: #4a4a4a;
+	font-weight:bold;
+	text-decoration: none;
+}
+.ih_accountlinks a:hover {
+	color: #a3bf29;
+	font-weight:bold;
+	text-decoration: underline;
+}
+#cart_empty{font-size:16px; text-align:center; font-weight:bold}
+#cal {
+	font-size:11px;
+	width:200px;
+	padding:0px;
+	margin:0
+}
+#shopping-basket {
+	font-size:12px;
+	border:#e1e1e1 1px solid;
+	margin-bottom:20px;
+	border-bottom:#BEBEBE 1px solid
+}
+#shopping-basket th {
+	background:#757575;
+	padding:10px;
+	color:#fff;
+	font-weight:bold;
+	font-size:12px;
+	text-align:left;
+}
+#shopping-basket tbody tr {
+	padding:10px;
+	background-image:url(images/bg_bottom.jpg);
+	background-repeat:repeat-x;
+	background-position:109% 114%;
+}
+#shopping-basket tbody td {
+	border-bottom:#e1e1e1 1px solid;
+	padding:20px
+}
+#cal1 tbody td {
+	padding:0;
+	border:0
+}
+#cal1 tbody tr {
+	padding:0;
+	border:0;
+	background:none
+}
+#cal1 th {
+	padding:0;
+	border:0;
+	background:#fff;
+	font-size:10px
+}
+.shopping_basket_total {
+	border-top:#e1e1e1 1px solid
+}
+#product_options {
+	float:left;
+	font-size:11px;
+	width:200px;
+	padding:0px;
+	margin:0
+}
+
+.button_remove{
+	padding:2px;
+	font-size:10px;
+	border:#e1e1e1 1px solid;
+	font-weight:bold;
+	cursor:pointer;
+	padding-left:5px;
+	padding-right:5px;
+	margin-top:10px;
+	background:#3f3f3f;
+	color:#f0f0f0;!important}
+
+ #addons {float:left;width:75px; text-align:center;padding:5px}

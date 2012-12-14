@@ -1,0 +1,41 @@
+.greenButtonEnabled{
+
+padding: 5px;
+font-size: 12px;
+font-family: verdana, arial;
+font-weight: bold;
+margin-top: 10px;
+background: #aac631;
+color : #000;
+cursor: pointer;
+border: #aac631 1px solid;
+}
+
+.greenButtonDisabled{
+	
+	padding: 5px; 
+	font-size: 12px;
+	 font-family: verdana, arial; 
+	  font-weight: bold;
+	    margin-top: 10px;
+}
+
+.logregButton{
+background: #aac631;
+color : #000;
+cursor: pointer;
+border: #aac631 1px solid;
+font-size: 10px;
+font-family: verdana, arial;
+
+}
+
+.forgbutton{
+background: #999999; 
+color : #000;
+cursor: pointer;
+border: 1px #999999 solid;
+font-size: 10px;
+font-family: verdana, arial;
+
+}

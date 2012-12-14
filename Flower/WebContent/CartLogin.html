@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Flower Shop</title>
+</head>
+<script src="js/jquery.1.8.js" type="text/javascript"></script>
+<style>
+.disabled {
+ 
+  color: GrayText;
+  cursor: inherit;
+}
+
+.logregButton{
+background: #aac631;
+color : #000;
+cursor: pointer;
+border: #aac631 1px solid;
+}
+
+.forgbutton{
+background: #999999; 
+color : #000;
+cursor: pointer;
+border: 1px #999999 solid;
+}
+</style>
+<script type="text/javascript">
+	
+</script>
+<body>
+<form method="post" action="registerUser.do" name="loginPage">
+<input type="hidden" id="lastPg" value="${pageContext.request.requestURI}">
+	<table align="center" width="100%" cellspacing="0" cellpadding="0"
+		border="0"
+		style="font-size: 12px; font-family: verdana, arial; font-weight: normal; color: #000; line-height: 150%;">
+		<tbody>
+			
+			<tr>
+				<td valign="top" style="padding: 15px 10px 10px 10px;">
+					<h2>Existing Customer</h2> <br> Log into your existing account
+					<br> <br> <label class="input"> <strong>Email</strong>
+						:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</label> <input id="login_email"  autocomplete="off" value=""
+					onchange="verifyExistingEmail();"> <br> <br> <label
+					class="input"> <strong>Password</strong> :
+				</label> <input id="login_password" type="password" value="" onchange="verifyEmailPass();"> <br>
+					<br> <input id="loginButton" type="button" disabled="disabled" class="disabled"
+					style="padding: 5px; font-size: 12px; font-family: verdana, arial; font-weight: bold;   margin-top: 10px;"
+					onclick="VerifyUser();" value="Login"> <br> <input
+					 type="button" onclick="mailPass();" disabled="disabled" class="disabled"
+					style="padding: 5px; font-size: 12px; font-family: verdana, arial;  font-weight: normal;   margin-top: 10px;"
+					value="Forgot Password" id="Forgot_Password"> <br>
+					<div id="account_login"></div> <br>
+				</td>
+				<td valign="top"
+					style="border-left: solid 1px #d5d5d5; padding: 15px 10px 10px 20px">
+					<h2>New Customer</h2> <br> Register to track the progress of
+					your order <br> <br> <label class="input"> <strong>Email</strong>
+						:
+				</label> <input id="emailExisting" value="" onchange="verifyEmail1();">
+					<br> <br> <label class="input"> <strong>Create
+							Password</strong> :
+				</label> <input id="account_password" type="password"
+					name="account_password" value="" onchange="checkLength();">
+					<br> <br> <label class="input"> <strong>Confirm
+							Password</strong> :
+				</label> <input id="confirm_password" type="password"
+					name="confirm_password" value="" onchange="verifypass();">
+					<br> <br> <input class="continue" type="button"
+					id="new_user" disabled="disabled" class="disabled"
+					style="padding: 5px; font-size: 12px; font-family: verdana, arial;  font-weight: bold;  margin-top: 10px;"
+					onclick="" value="Register"> <br><div float:left; border-right:#e1e1e1 1px solid;padding-right:25px;width:180px></div>
+					<div id="new_customer_error"></div>
+
+				</td>
+				<td valign="top"
+					style="border-left: solid 1px #d5d5d5; padding: 15px 10px 10px 20px">
+					<h2>Guest</h2>
+					<br>
+					Continue checkout as guest
+					<br>
+					<br>
+					<br>
+				<input type="button" style="padding: 5px; font-size: 12px; font-family: verdana, arial;  font-weight: bold;  margin-top: 10px; background: #aac631;
+color : #000; cursor: pointer; border: #aac631 1px solid;"  onclick="login('guest');" value="Guest"></td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+<script type="text/javascript">
+
+	
+//existing user
+		function verifyExistingEmail() {
+			$("#login_error").hide();
+			$(".error").hide();
+			$('#error').hide();
+			$(".error_pass").hide();
+			$('#error_pass').hide();
+			
+			alert(!($('#Forgot_Password').is(':disabled')));
+			var hasError = false;
+			var emailReg = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+			var emailaddressVal = $("#login_email").val();
+			if (emailaddressVal == '') {
+				alert("error1");
+				$("#login_email")
+						.after(
+								'<span id="error" class="error" style="color: red;font-size: 8px">Please enter your email address.</span>');
+				hasError = true;
+			}
+
+			else if (!emailReg.test(emailaddressVal)) {
+				alert("error2");
+				$("#login_email")
+						.after(
+								'<span id="error" class="error" style="color: red;font-size: 12px">Enter a valid email address.</span>');
+				$("#login_email").val("");
+				
+				hasError = true;
+			}
+			if (hasError == true) {
+				if(!($('#Forgot_Password').is(':disabled'))){
+				$("#Forgot_Password").removeClass("forgbutton").addClass("disabled");
+				$("#Forgot_Password").attr("disabled");
+				}
+				return false;
+			} else {
+				$(".error").hide();
+				$('#error').hide();
+				$.getJSON("verify.do", {
+					action : "2",
+					emailID : $("#login_email").val()
+				}, displayUserExist);
+			}
+
+		}
+	function displayUserExist(data){
+		alert("displayUserExist");
+		if (data.error) {
+			alert("data.error");
+			$("#login_email")
+					.after(
+							'<span id="login_error" class="error_login" style="color: red;font-size: 10px; padding-left:2px;text-align:center;  font-weight:bold; ">  User not registered.</span>');
+
+			$("#login_email").val("");
+		}else{
+			alert("user authenticated");
+			$("#Forgot_Password").removeClass("disabled").addClass("forgbutton");
+			
+			$("#Forgot_Password").removeAttr("disabled");
+			
+			alert("done");
+		}
+		 /* if(data.success){alert("success");
+		$("#login_email").after('<span id="login_error" class="error_login" style="color: red;padding-left:2px;font-size: 10px;font-weight:bold;text-align:center; ">  Enter a valid email address/Password.</span>'); */
+		//} 
+	}
+		
+	function verifyEmailPass(){
+		$(".login_errorPass").hide();
+		$('#login_errorPass').hide();
+		var hasError=false;
+		
+		if (($('#login_password').val()) == '' ) {
+			alert("error4");
+			$("#login_password")
+					.after(
+							'<span id="error_pass" class="error_pass" style="color: red;font-size: 8px">Please enter your password.</span>');
+			hasError = true;
+		}else if($("#account_password").val().length <5) {
+			$("#login_password")
+			.after(
+					'<span id="error_pass" class="error_pass" style="color: red;font-size: 8px">Password incorrect.</span>');
+	hasError = true;
+		}
+		if(hasError == true){
+			return false;
+		}
+	else{
+		alert("no password error");
+		$("#loginButton").removeClass("disabled").addClass("logregButton");
+		
+		$("#loginButton").removeAttr("disabled");
+		
+		alert("done");
+		return true;
+		}
+		
+		
+	}
+	
+		function VerifyUser() {
+
+			$("#login_error").hide();
+			var a = $("#login_email").val();
+			$.getJSON("verify.do", {
+				action : "1",
+				emailID : $("#login_email").val(),
+				password : $("#login_password").val()
+			}, verfiedUserPass);
+
+		}
+
+		function verfiedUserPass(data) {
+			if (data.error) {
+				alert(data.error);
+				$("#login_email")
+						.after(
+								'<span id="login_errorPass" class="login_errorPass" style="color: red;font-size: 10px; padding-left:2px;text-align:center;  font-weight:bold; ">  Wrong password.</span>');
+				$("#login_password").val("");
+				return false;
+
+			}else{
+				
+				document.loginPage.submit();
+				
+		/// send to home page or previous page and set user name and password		
+			}
+			
+		}
+
+		
+		function mailPass(){
+			
+		//send message that password has been sent to the registered email	
+			
+		}
+		
+		
+		
+		
+		//*****new user	******************	
+	
+		
+		
+		function verifyEmail1() {
+			if(!verify()){return false;}else{
+			$.getJSON("verify.do", {
+				action : "2",
+				emailID : $("#emailExisting").val()
+			}, displayNewUserError);}
+		}
+
+		function verify() {
+			$(".error").hide();
+			$('#error').hide();
+			
+			$("#login_password").val("");
+			$("#login_error").hide();
+			$(".login_errorPass").hide();
+			$('#login_errorPass').hide();
+			$(".loginpass_error2").hide();
+			$('#loginpass_error2').hide();
+			
+			if(!($('#Forgot_Password').is(':disabled'))){
+				$("#Forgot_Password").removeClass("forgbutton").addClass("disabled");
+				$("#Forgot_Password").attr("disabled");
+				}
+			if(!($('#loginButton').is(':disabled'))){
+				$("#loginButton").removeClass("logregButton").addClass("disabled");
+				$("#loginButton").attr("disabled");
+				}
+			
+			var hasError = false;
+			var emailReg = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+			var emailaddressVal = $("#emailExisting").val();
+			if (emailaddressVal == '') {
+				$("#emailExisting")
+						.after(
+								'<span id="error2" class="error2" style="color: red;font-size: 8px">Please enter your email address.</span>');
+				hasError = true;
+			}
+
+			else if (!emailReg.test(emailaddressVal)) {
+				$("#emailExisting")
+						.after(
+								'<span id="error2" class="error2" style="color: red;font-size: 12px">Enter a valid email address.</span>');
+				hasError = true;
+			}
+			if (hasError == true) {
+				$("#emailExisting").val("");
+				if(!($('#new_user').is(':disabled'))){
+					$("#new_user").removeClass("logregButton").addClass("disabled");
+					$("#new_user").attr("disabled");
+					}
+				return false;
+			} else {
+				$(".error2").hide();
+				$('#error2').hide();
+					return true;
+			}
+		}
+		function displayNewUserError(data) {
+
+			if (data.success) {
+				alert(data.success);
+				$("#emailExisting")
+						.after(
+								'<span id="login_error2" class="login_error2" style="color: red;font-size: 10px; padding-left:2px;text-align:center;  font-weight:bold; ">  User already registered.</span>');
+
+				if(!($('#new_user').is(':disabled'))){
+					$("#new_user").removeClass("logregButton").addClass("disabled");
+					$("#new_user").attr("disabled");
+					}
+			}
+			/* if(data.success){alert("success");
+			$("#login_email").after('<span id="login_error" class="error_login" style="color: red;padding-left:2px;font-size: 10px;font-weight:bold;text-align:center; ">  Enter a valid email address/Password.</span>');
+			} */
+		}
+		function verifypass() {
+
+			if ($('#confirm_password').val() != $('#account_password').val()) {
+				alert("Passwords don't match");
+
+				if(!($('#new_user').is(':disabled'))){
+					$("#new_user").removeClass("logregButton").addClass("disabled");
+					$("#new_user").attr("disabled");
+					}
+			}else
+				{
+				$("#new_user").removeClass("disabled").addClass("logregButton");
+				
+				$("#new_user").removeAttr("disabled");
+				
+				
+				}
+		}
+		function checkLength() {
+			if ($("#account_password").val().length <5) {
+				$("#account_password").val("");
+				$("#account_password")
+						.after(
+								'<span id="loginpass_error2" class="errorpass_login" style="color: red;font-size: 10px; padding-left:2px;text-align:center;  font-weight:bold; ">  Password should be greater than 6 characters.</span>');
+
+				if(!($('#new_user').is(':disabled'))){
+					$("#new_user").removeClass("logregButton").addClass("disabled");
+					$("#new_user").attr("disabled");
+					}
+			} else {
+				$(".loginpass_error2").hide();
+				$('#loginpass_error2').hide();
+
+			}
+			
+		}
+
+</script>
+
+
+
+</body>
+</html>
