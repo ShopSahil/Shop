@@ -64,15 +64,11 @@ public class XmlParser {
                 Element docEle = doc.getDocumentElement();
  
                 // Print root element of the document
-                System.out.println("Root element of the document: "
-                        + docEle.getNodeName());
- 
+     
                 NodeList menuList = docEle.getElementsByTagName("MenuLink");
  
                 // Print total MenuLink elements in document
-                System.out
-                        .println("Total MenuLinks: " + menuList.getLength());
- 
+     
                 if (menuList != null && menuList.getLength() > 0) {
                     for (int i = 0; i < menuList.getLength(); i++) {
  
@@ -80,8 +76,6 @@ public class XmlParser {
                         Node node = menuList.item(i);
  
                         if (node.getNodeType() == Node.ELEMENT_NODE) {
- 
-                            System.out.println("=====================");
  
                             Element e = (Element) node;
                             NodeList nodeList = e.getElementsByTagName("MenuName");

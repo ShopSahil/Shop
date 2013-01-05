@@ -220,41 +220,13 @@ padding-left:10px; padding-right:10px; font-size:13px;" */
 	</table>
 	<div class="slider-wrapper" style="padding-top: 5px;">
 		<div id="slider1" class="nivoSlider">
-			<img src="images/nivo1.jpg" alt="" /> <img
+<img src="images/nivo1.jpg" alt="" /> <img
 				src="images/nivo2.jpg" alt="" />
 
 		</div>
 
 	</div>
 <div class="grid" align="center">
-<c:forEach items="${prod}" var="HomepageDAO" varStatus="status">
-	<div class="product" style="padding-top: 40px; text-align: center;" align="center" >
-
-		<div style="width: 217px; height: 8px;">
-			<img src="images/productbackground1.gif" width="217" height="8">
-		</div>
-		<div class="product_border">
-			<a href= "${pageContext.request.contextPath}/product/bouquet.jsp?id=${HomepageDAO.productID}"><img src="${HomepageDAO.productImage}" width="215" height="215" border="0" /></a>
-		</div>
-		<div class="product_border product_text">
-			<a href="${pageContext.request.contextPath}/product/bouquet.jsp?id=${HomepageDAO.productID}" style="font-size: 15px; color: #444444;">${HomepageDAO.productName}</a>
-		</div>
-		<div class="buy_price product_border">
-			<span class="orginial_price">Rs${HomepageDAO.productOrigPrice}</span> Rs${HomepageDAO.productDiscPrice}
-		</div>
-
-		<div class="product_border product_text">${HomepageDAO.productShortDescrip}</div>
-		<div class="product_border">
-			<a href="${pageContext.request.contextPath}/product/bouquet.jsp?id=${HomepageDAO.productID}"><img src="images/shopnow.gif" width="93" height="22"
-				vspace="5" border="0" /></a>
-		</div>
-
-		<div style="width: 215px; height: 8px;">
-			<img src="images/productbackground3.gif" width="215" height="8">
-		</div>
-
-	</div>
-</c:forEach>
 	
 </div>
 
