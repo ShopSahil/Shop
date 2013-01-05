@@ -4,7 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Flower Shop</title>
 </head>
-
 <script src="../js/jquery-1.8.0.min.js" type="text/javascript"></script>
 <style>
 .disabled {
@@ -238,7 +237,7 @@ border: 1px #999999 solid;
 		
 		
 		function verifyEmail1() {
-			
+		alert(123);
 			if(!verify())
 			{ 
 				return false;
@@ -369,10 +368,20 @@ border: 1px #999999 solid;
 		}
 		
 		function sendEmail(data)
-		{
-			document.getElementById("sendMailRegister1").src = "../sendMail_process.jsp?newUserEmailId="+$("#emailExisting").val()+"&newUserPassword="+$("#account_password").val();
+		{alert(22);
+			$.getJSON("../SendMail.do", 
+			{
+				receiverMails : $("#emailExisting").val(),
+				newPassword : $("#account_password").val()
+			}, 
+			mailSent);
+			//document.getElementById("sendMailRegister1").src = "../sendMail_process.jsp?newUserEmailId="+$("#emailExisting").val()+"&newUserPassword="+$("#account_password").val();
 		}
 
+		function mailSent(data)
+		{
+			alert(12);
+		}
 </script>
 
 

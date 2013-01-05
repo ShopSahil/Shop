@@ -79,6 +79,16 @@
     <servlet-name>RegisterUser</servlet-name>
     <url-pattern>/RegisterUser.do</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>SendMail</display-name>
+    <servlet-name>SendMail</servlet-name>
+    <servlet-class>shop.util.MailUtil</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendMail</servlet-name>
+    <url-pattern>/SendMail.do</url-pattern>
+  </servlet-mapping> 
   <servlet>
     <description></description>
     <display-name>test</display-name>
