@@ -1,0 +1,88 @@
+
+body {
+width:950px;
+	text-align:center; 
+margin:0 auto;
+	font-family: arial;
+	font-weight: normal;
+	background: url(images/pagebackground.jpg) repeat-x #f7f7f7 top center	!important;
+	margin-top: 0px;
+}
+
+.productbackground1 {
+	width: 217px;
+	height: 8px;
+	background-image: url("images/productbackground1.gif");
+}
+
+.buy_price {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	font-family: Arial;
+	font-size: 20px;
+	letter-spacing: -1px;
+	line-height: 120%;
+	color: #444444;
+	font-weight: normal;
+}
+
+.orginial_price {
+	color: #7b7b7b;
+	font-size: 20px;
+	letter-spacing: -1px;
+	line-height: 120%;
+	text-decoration: line-through;
+}
+
+.product_border {
+	width: 215px;
+	height: auto;
+	border-left: solid 1px #c3c3c3;
+	background: #FFFFFF;
+	border-right: solid 1px #c3c3c3;
+}
+
+.product_text {
+	overflow: hidden;
+	font-size: 13px;
+	color: #444444;
+	line-height: 130%;
+}
+.product {
+    float: left;
+    height: 370px;
+    margin-bottom: 0;
+    margin-top: 5px;
+    padding: 0;
+    text-align: center;
+    width: 232px;
+}
+
+.grid{
+text-align:center; 
+margin:0 auto;
+width: 936px;
+height:auto;
+align: center;
+
+}
+
+.ih_accountlinks {
+	font: normal 13px Arial;
+	color: #000000;
+}
+.ih_accountlinks a:link {
+	color: #4a4a4a;
+	font-weight:bold;
+	text-decoration: none;
+}
+.ih_accountlinks a:visited {
+	color: #4a4a4a;
+	font-weight:bold;
+	text-decoration: none;
+}
+.ih_accountlinks a:hover {
+	color: #a3bf29;
+	font-weight:bold;
+	text-decoration: underline;
+}

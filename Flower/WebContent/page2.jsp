@@ -194,8 +194,25 @@ padding-left:10px; padding-right:10px; font-size:13px;" */
 				<div id="menu" class="menu">
 					<ul class="menu">
 						<c:forEach items="${menuList}" var="MenuLink" varStatus="status">					
-						<li>
+						<c:choose>
+						<c:when test="${MenuLink eq 'Same Day' }" >
+						<li class="current">
+						
+							<a href="#" class="current"><span>${MenuLink}</span></a>
+							</c:when>
+						<c:when test="${MenuLink eq 'About Us' }" >
+						<li class="last">
+						
+							<a href="#" class="current"><span>${MenuLink}</span></a>
+							</c:when>
+								
+							<c:otherwise>
+							<li>
 							<a href="#"><span>${MenuLink}</span></a>
+							</c:otherwise>
+							</c:choose>
+						
+						
 							
 								<c:forEach items="${submenuList}" var="SubMenuLink" varStatus="status">								
 									<c:if test="${SubMenuLink.menuName eq MenuLink}">						

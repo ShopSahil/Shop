@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
  
@@ -17,13 +19,20 @@ import shop.dao.SubMenuPage;
  
 public class XmlParser {
 	
-	private List<String> menuLinkList;
-	private List<MenuPage> menuPageList;
-	private List<SubMenuPage> subMenuPageList;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static List<String> menuLinkList;
+	private static List<MenuPage> menuPageList;
+	private static List<SubMenuPage> subMenuPageList;
 	
 
 	public List<String> getMenuLinkList() {
+		if (menuLinkList == null || menuLinkList.isEmpty()){
+			
 		this.getAllMenuList("c:\\MenuLinks.xml");
+		}
 		return menuLinkList;
 	}
 
@@ -122,9 +131,6 @@ public class XmlParser {
                                                 .getNodeValue());
              
                                         subnodeList = e1.getElementsByTagName("Value");
-                                        System.out.println("Value: "
-                                                + subnodeList.item(0).getChildNodes().item(0)
-                                                        .getNodeValue());
                                         
                                         subMenuPage.setSubLinkValue(subnodeList.item(0).getChildNodes().item(0)
                                                 .getNodeValue());

@@ -27,7 +27,7 @@
     }
 %>
 
-
+<link type="text/css" href="css/everyPage.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/nivo-slider.css" type="text/css"
 	media="screen" />
 <link rel="stylesheet" href="css/style1.css" type="text/css"
@@ -38,117 +38,6 @@
 <script type="text/javascript" src="js/jquery.validate.pack.js"></script>
 <script type="text/javascript" src="js/jquery.contactable.js"></script>
 <link rel="stylesheet" href="css/contactable.css" type="text/css" />
-
-<style type="text/css">
-#toTop {
-	width:100px;
-        border:1px solid #ccc;
-        background:#f7f7f7;
-        text-align:center;
-        padding:5px;
-        position:fixed; /* this is the magic */
-        bottom:10px; /* together with this to put the div at the bottom*/
-        right:10px;
-        cursor:pointer;
-        display:none;
-        color:#333;
-        font-family:verdana;
-        font-size:11px;
-}
-
-body {
-width:950px;
-	text-align:center; 
-margin:0 auto;
-	font-family: arial;
-	font-weight: normal;
-	background: url(images/pagebackground.jpg) repeat-x #f7f7f7 top center	!important;
-	margin-top: 0px;
-}
-
-.productbackground1 {
-	width: 217px;
-	height: 8px;
-	background-image: url("images/productbackground1.gif");
-}
-
-.buy_price {
-	padding-top: 3px;
-	padding-bottom: 3px;
-	font-family: Arial;
-	font-size: 20px;
-	letter-spacing: -1px;
-	line-height: 120%;
-	color: #444444;
-	font-weight: normal;
-}
-
-.orginial_price {
-	color: #7b7b7b;
-	font-size: 20px;
-	letter-spacing: -1px;
-	line-height: 120%;
-	text-decoration: line-through;
-}
-
-.product_border {
-	width: 215px;
-	height: auto;
-	border-left: solid 1px #c3c3c3;
-	background: #FFFFFF;
-	border-right: solid 1px #c3c3c3;
-}
-
-.product_text {
-	overflow: hidden;
-	font-size: 13px;
-	color: #444444;
-	line-height: 130%;
-}
-.product {
-    float: left;
-    height: 370px;
-    margin-bottom: 0;
-    margin-top: 5px;
-    padding: 0;
-    text-align: center;
-    width: 232px;
-}
-
-.grid{
-text-align:center; 
-margin:0 auto;
-width: 936px;
-height:auto;
-align: center;
-
-}
-
-.ih_accountlinks {
-	font: normal 13px Arial;
-	color: #000000;
-}
-.ih_accountlinks a:link {
-	color: #4a4a4a;
-	font-weight:bold;
-	text-decoration: none;
-}
-.ih_accountlinks a:visited {
-	color: #4a4a4a;
-	font-weight:bold;
-	text-decoration: none;
-}
-.ih_accountlinks a:hover {
-	color: #a3bf29;
-	font-weight:bold;
-	text-decoration: underline;
-}
-
-/* 
-width:215px; 
-height:auto;  overflow:hidden; 
-padding-left:10px; padding-right:10px; font-size:13px;" */
-</style>
 
 </head>
 <body >
@@ -209,8 +98,25 @@ padding-left:10px; padding-right:10px; font-size:13px;" */
 				<div id="menu" class="menu">
 					<ul class="menu">
 						<c:forEach items="${menuList}" var="MenuLink" varStatus="status">					
-						<li>
+						<c:choose>
+						<c:when test="${MenuLink eq 'Same Day' }" >
+						<li class="current">
+						
+							<a href="#" class="current"><span>${MenuLink}</span></a>
+							</c:when>
+						<c:when test="${MenuLink eq 'About Us' }" >
+						<li class="last">
+						
+							<a href="#" class="current"><span>${MenuLink}</span></a>
+							</c:when>
+								
+							<c:otherwise>
+							<li>
 							<a href="#"><span>${MenuLink}</span></a>
+							</c:otherwise>
+							</c:choose>
+						
+						
 							
 								<c:forEach items="${submenuList}" var="SubMenuLink" varStatus="status">								
 									<c:if test="${SubMenuLink.menuName eq MenuLink}">						
@@ -235,63 +141,18 @@ padding-left:10px; padding-right:10px; font-size:13px;" */
 	</table>
 	<div class="slider-wrapper" style="padding-top: 5px;">
 		<div id="slider1" class="nivoSlider">
-			<img src="images/nivo1.jpg" alt="" /> <img
+<img src="images/nivo1.jpg" alt="" /> <img
 				src="images/nivo2.jpg" alt="" />
 
 		</div>
 
 	</div>
 <div class="grid" align="center">
-<c:forEach items="${prod}" var="HomepageDAO" varStatus="status">
-	<div class="product" style="padding-top: 40px; text-align: center;" align="center" >
-
-		<div style="width: 217px; height: 8px;">
-			<img src="images/productbackground1.gif" width="217" height="8">
-		</div>
-		<div class="product_border">
-			<a href= "${pageContext.request.contextPath}/product/bouquet.jsp?id=${HomepageDAO.productID}"><img src="${HomepageDAO.productImage}" width="215" height="215" border="0" /></a>
-		</div>
-		<div class="product_border product_text">
-			<a href="${pageContext.request.contextPath}/product/bouquet.jsp?id=${HomepageDAO.productID}" style="font-size: 15px; color: #444444;">${HomepageDAO.productName}</a>
-		</div>
-		<div class="buy_price product_border">
-			<span class="orginial_price">Rs${HomepageDAO.productOrigPrice}</span> Rs${HomepageDAO.productDiscPrice}
-		</div>
-
-		<div class="product_border product_text">${HomepageDAO.productShortDescrip}</div>
-		<div class="product_border">
-			<a href="${pageContext.request.contextPath}/product/bouquet.jsp?id=${HomepageDAO.productID}"><img src="images/shopnow.gif" width="93" height="22"
-				vspace="5" border="0" /></a>
-		</div>
-
-		<div style="width: 215px; height: 8px;">
-			<img src="images/productbackground3.gif" width="215" height="8">
-		</div>
-
-	</div>
-</c:forEach>
 	
 </div>
 
 	<script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
 	<script type="text/javascript">
-	
-	$(function() {
-		$(window).scroll(function() {
-			if($(this).scrollTop() != 0) {
-				$('#toTop').fadeIn();	
-			} else {
-				$('#toTop').fadeOut();
-			}
-		});
-	 
-		$('#toTop').click(function() {
-			$('body,html').animate({scrollTop:0},800);
-		});	
-	});
-
-	
-	
 		$(window).load(function() {
 		
 			$('#slider1').nivoSlider();
@@ -303,8 +164,6 @@ padding-left:10px; padding-right:10px; font-size:13px;" */
 		 	});
 		});
 	</script>
-	
-<div id="toTop">^ Back to Top</div>
 <div id="Feedback">
 </div>
 <div style="visibility: hidden">
